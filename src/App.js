@@ -31,6 +31,9 @@ function App() {
       case "C":
         handleClear()
         break;
+      case "+-":
+        handleReverse()
+        break;
       default:
         handleNumberClick(btn)
     }
@@ -108,6 +111,15 @@ function App() {
     setCount({
       enteredValue: 0,
       totalValue: 0,
+      sign: "",
+    });
+  }
+
+  const handleReverse = () => {
+    setCount({
+      ...count,
+      enteredValue: count.enteredValue ? count.enteredValue * -1 : 0,
+      totalValue: count.totalValue ? count.totalValue * -1 : 0,
       sign: "",
     });
   }

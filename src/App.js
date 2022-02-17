@@ -4,7 +4,7 @@ import Screen from "./components/Screen";
 import ButtonArea from "./components/ButtonArea";
 import Button from "./components/Button";
 
-const btnSymbols = ["C", "+-", "%", "√ ", 7, 8, 9, "÷", 4, 5, 6, "×", 1, 2, 3, "-", 0, ".", "=", "+"]
+const btnSymbols = ["C", "+-", "%", "sq", 7, 8, 9, "÷", 4, 5, 6, "×", 1, 2, 3, "-", 0, ".", "=", "+"]
 
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
 
 
   const handleClick = (btn) => {
-
     switch (btn) {
       case "=":
         handleSubmit()
@@ -37,6 +36,9 @@ function App() {
       case "%":
         handlePercent()
         break;
+      case "sq":
+        handleSqure()
+        break;
       default:
         handleNumberClick(btn)
     }
@@ -45,12 +47,19 @@ function App() {
   }
 
   const handleNumberClick = (btnSymbol) => {
+
+    btnSymbol = btnSymbol.toString()
+
     function handleEnteredValue() {
+      //第一次輸入為 0 時
       if (count.enteredValue === 0 && btnSymbol === "0") {
         return "0"
       } else if (count.enteredValue % 1 === 0) {
+
         return Number(count.enteredValue + btnSymbol)
-      } return count.enteredValue + btnSymbol
+
+      }
+      return count.enteredValue + btnSymbol
 
     }
     setCount({
@@ -75,9 +84,6 @@ function App() {
         } return a / b
 
       }
-
-
-
       function getTotalValue() {
         if (count.num === "0" && count.sign === "/") {
           return "ERROR"
@@ -128,7 +134,7 @@ function App() {
   }
 
   const handlePercent = () => {
-  
+
     setCount({
       ...count,
       enteredValue: (count.enteredValue ? count.enteredValue : 0) / 100,
@@ -138,7 +144,15 @@ function App() {
   };
 
 
+  const handleSqure = () => {
 
+    setCount({
+      ...count,
+      enteredValue: Math.sqrt(count.enteredValue ? Number(count.enteredValue) : 0),
+      totalValue: Math.sqrt(count.totalValue ? Number(count.totalValue) : 0),
+      sign: "",
+    });
+  };
 
   return (
     <Wrapper>

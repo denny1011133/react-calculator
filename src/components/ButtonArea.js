@@ -1,8 +1,10 @@
 import React from 'react';
+import "./ButtonArea.css";
 
 
-const ButtonArea = () => {
-    return <div ></div>;
+
+const ButtonBox = ({ children }) => {
+    return <div className="buttonArea">{children}</div>;
 };
 
-export default ButtonArea;
+export default ButtonBox;

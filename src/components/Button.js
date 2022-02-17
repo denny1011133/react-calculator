@@ -1,8 +1,10 @@
 import React from 'react';
+import "./Button.css";
 
-
-const Button = () => {
-    return <div ></div>;
+const Button = (props) => {
+  return (
+    <button ></button>
+  );
 };
 
 export default Button;

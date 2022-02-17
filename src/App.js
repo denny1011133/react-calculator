@@ -4,7 +4,7 @@ import Screen from "./components/Screen";
 import ButtonArea from "./components/ButtonArea";
 import Button from "./components/Button";
 
-const btnSymbols =["C","+-","%","√ ",7,8,9,"÷",4,5,6,"×",1,2,3,"-",0,".","=","+"]
+const btnSymbols = ["C", "+-", "%", "√ ", 7, 8, 9, "÷", 4, 5, 6, "×", 1, 2, 3, "-", 0, ".", "=", "+"]
 
 
 function App() {
@@ -17,21 +17,29 @@ function App() {
 
 
   const handleClick = (btn) => {
-    const btnSymbol = btn.target.innerText
-    if (btnSymbol === "=") {
-      handleSubmit()
-    } else if (btnSymbol === "/" || btnSymbol === "X" || btnSymbol === "-" || btnSymbol === "+") {
-      handleSignClick(btnSymbol)
-    } else if (btnSymbol === "C") {
-      handleClear()
-    } else (
-      handleNumberClick(btnSymbol)
-    )
+
+    switch (btn) {
+      case "=":
+        handleSubmit()
+        break;
+      case "+":
+      case "-":
+      case "÷":
+      case "×":
+        handleSignClick(btn)
+        break;
+      case "C":
+        handleClear()
+        break;
+      default:
+        handleNumberClick(btn)
+    }
+
+
   }
 
   const handleNumberClick = (btnSymbol) => {
-
-    function handleEnterValue() {
+    function handleEnteredValue() {
       if (count.enteredValue === 0 && btnSymbol === "0") {
         return "0"
       } else if (count.enteredValue % 1 === 0) {
@@ -41,7 +49,7 @@ function App() {
     }
     setCount({
       ...count,
-      enteredValue: handleEnterValue(),
+      enteredValue: handleEnteredValue(),
       totalValue: !count.sign ? 0 : count.totalValue,
     });
 
@@ -56,7 +64,7 @@ function App() {
           return a + b
         } else if (sign === "-") {
           return a - b
-        } else if (sign === "X") {
+        } else if (sign === "×") {
           return a * b
         } return a / b
 
@@ -113,7 +121,7 @@ function App() {
             return (
               <Button
                 key={i}
-                value={btn} onhandleClick={(btn) => handleClick(btn)}
+                value={btn} onhandleClick={handleClick}
               />
             );
           })

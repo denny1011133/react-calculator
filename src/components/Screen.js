@@ -1,10 +1,10 @@
 import React from 'react';
 import "./Screen.css";
 
-const Screen = (props) => {
+const Screen = ({ value }) => {
     return (
         <div className="screen" >
-
+            {value}
         </div>
     );
 };

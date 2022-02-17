@@ -34,6 +34,9 @@ function App() {
       case "+-":
         handleReverse()
         break;
+      case "%":
+        handlePercent()
+        break;
       default:
         handleNumberClick(btn)
     }
@@ -123,6 +126,19 @@ function App() {
       sign: "",
     });
   }
+
+  const handlePercent = () => {
+  
+    setCount({
+      ...count,
+      enteredValue: (count.enteredValue ? count.enteredValue : 0) / 100,
+      totalValue: (count.totalValue ? count.totalValue : 0) / 100,
+      sign: "",
+    });
+  };
+
+
+
 
   return (
     <Wrapper>

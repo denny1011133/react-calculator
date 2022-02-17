@@ -1,10 +1,11 @@
 import React from 'react';
 import "./Screen.css";
 
-const Screen = ({ value }) => {
+const Screen = ({ count, value }) => {
     return (
         <div className="screen" >
-            {value}
+            <div>{`${count.totalValue} ${count.sign}`}</div>
+            <div>{value}</div>
         </div>
     );
 };

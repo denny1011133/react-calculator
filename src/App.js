@@ -75,14 +75,37 @@ function App() {
 
       const arithmetic = (a, b, sign) => {
 
-        if (sign === "+") {
-          return a + b
-        } else if (sign === "-") {
-          return a - b
-        } else if (sign === "×") {
-          return a * b
-        } return a / b
 
+        if (sign === "+") {
+          if (a + b > Math.pow(2, 32)) {
+            alert("超過數字上限")
+            return 0
+          } else {
+            return a + b
+          }
+
+        } else if (sign === "-") {
+          if (a - b > Math.pow(2, 32)) {
+            alert("超過數字上限")
+            return 0
+          } else {
+            return a - b
+          }
+        } else if (sign === "×") {
+          if (a * b > Math.pow(2, 32)) {
+            alert("超過數字上限")
+            return 0
+          } else {
+            return a * b
+          }
+        } else if (sign === "÷") {
+          if (a / b > Math.pow(2, 32)) {
+            alert("超過數字上限")
+            return 0
+          } else {
+            return a / b
+          }
+        }
       }
       function getTotalValue() {
         if (count.num === "0" && count.sign === "/") {
@@ -118,6 +141,7 @@ function App() {
 
   const handleClear = () => {
     setCount({
+      ...count,
       enteredValue: 0,
       totalValue: 0,
       sign: "",
@@ -156,7 +180,7 @@ function App() {
 
   return (
     <Wrapper>
-      <Screen value={count.enteredValue ? count.enteredValue : count.totalValue} />
+      <Screen count={count} value={count.enteredValue ? count.enteredValue : count.totalValue} />
       <ButtonArea>
         {
           btnSymbols.map((btn, i) => {

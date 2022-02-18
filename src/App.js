@@ -39,6 +39,9 @@ function App() {
       case "sq":
         handleSqure()
         break;
+      case ".":
+        handleDecimal(btn)
+        break;
       default:
         handleNumberClick(btn)
     }
@@ -178,6 +181,21 @@ function App() {
     });
   };
 
+  const handleDecimal = (btnSymbol) => {
+
+    function enterDecimal() {
+      if (!count.enteredValue.toString().includes(".")) {
+        return count.enteredValue + btnSymbol
+      } else {
+        return count.enteredValue
+      }
+    }
+    setCount({
+      ...count,
+      enteredValue: enterDecimal()
+    });
+
+  };
   return (
     <Wrapper>
       <Screen count={count} value={count.enteredValue ? count.enteredValue : count.totalValue} />

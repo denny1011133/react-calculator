@@ -54,7 +54,7 @@ function App() {
     btnSymbol = btnSymbol.toString()
 
     function handleEnteredValue() {
-      //第一次輸入為 0 時
+
       if (count.enteredValue === 0 && btnSymbol === "0") {
         return "0"
       } else if (count.enteredValue % 1 === 0) {
@@ -62,6 +62,7 @@ function App() {
         return Number(count.enteredValue + btnSymbol)
 
       }
+
       return count.enteredValue + btnSymbol
 
     }
@@ -83,36 +84,36 @@ function App() {
           if (a + b > Math.pow(2, 32)) {
             alert("超過數字上限")
             return 0
-          } else {
-            return a + b
           }
+          return a + b
+
 
         } else if (sign === "-") {
           if (a - b > Math.pow(2, 32)) {
             alert("超過數字上限")
             return 0
-          } else {
-            return a - b
           }
+          return a - b
+
         } else if (sign === "×") {
           if (a * b > Math.pow(2, 32)) {
             alert("超過數字上限")
             return 0
-          } else {
-            return a * b
           }
+          return a * b
+
         } else if (sign === "÷") {
           if (a / b > Math.pow(2, 32)) {
             alert("超過數字上限")
             return 0
-          } else {
-            return a / b
           }
+          return a / b
+
         }
       }
       function getTotalValue() {
-        if (count.num === "0" && count.sign === "/") {
-          return "ERROR"
+        if (count.enteredValue === "0" && count.sign === "÷") {
+          return "無法除以零"
         } else {
           return arithmetic(Number(count.totalValue), Number(count.enteredValue), count.sign)
         }
@@ -122,7 +123,7 @@ function App() {
         totalValue: getTotalValue(),
         sign: "",
         enteredValue: 0,
-      });
+      })
     }
   }
 
@@ -173,7 +174,7 @@ function App() {
     setCount({
       ...count,
       enteredValue: Math.sqrt(count.enteredValue),
-      totalValue: Math.sqrt(count.totalValue ),
+      totalValue: Math.sqrt(count.totalValue),
       sign: "",
     });
   }
@@ -181,10 +182,10 @@ function App() {
   const handleDecimal = (btnSymbol) => {
 
     function enterDecimal() {
-      if (!count.enteredValue.toString().includes(".")) {
-        return count.enteredValue + btnSymbol
-      } else {
+      if (count.enteredValue.toString().includes(".")) {
         return count.enteredValue
+      } else {
+        return count.enteredValue + btnSymbol
       }
     }
     setCount({

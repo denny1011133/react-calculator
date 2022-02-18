@@ -3,6 +3,8 @@ import Wrapper from "./components/Wrapper";
 import Screen from "./components/Screen";
 import ButtonArea from "./components/ButtonArea";
 import Button from "./components/Button";
+import { ItemTypes } from "./constants"
+import { useDrop } from 'react-dnd'
 
 const btnSymbols = ["C", "+-", "%", "sq", 7, 8, 9, "÷", 4, 5, 6, "×", 1, 2, 3, "-", 0, ".", "=", "+"]
 
@@ -15,6 +17,14 @@ function App() {
     sign: "",
   })
 
+  const [, dropRef] = useDrop(
+    () => ({
+      accept: ItemTypes.WRAPPER,
+      drop: (item) => {
+        console.log("Drop on todo", item);
+      },
+    })
+  )
 
   const handleClick = (btn) => {
     switch (btn) {
@@ -196,21 +206,23 @@ function App() {
   }
 
   return (
-    <Wrapper>
-      <Screen count={count} value={count.enteredValue ? count.enteredValue : count.totalValue} />
-      <ButtonArea>
-        {
-          btnSymbols.map((btn, i) => {
-            return (
-              <Button
-                key={i}
-                value={btn} handleClick={handleClick}
-              />
-            );
-          })
-        }
-      </ButtonArea>
-    </Wrapper>
+    <div ref={dropRef}>
+      <Wrapper>
+        <Screen count={count} value={count.enteredValue ? count.enteredValue : count.totalValue} />
+        <ButtonArea>
+          {
+            btnSymbols.map((btn, i) => {
+              return (
+                <Button
+                  key={i}
+                  value={btn} handleClick={handleClick}
+                />
+              );
+            })
+          }
+        </ButtonArea>
+      </Wrapper>
+    </div>
   )
 }
 

@@ -13,11 +13,11 @@ function App() {
 
   const enteredValue = localStorage.getItem('enteredValue')
   const totalValue = localStorage.getItem('totalValue')
-
+  const sign = localStorage.getItem('sign')
   let [count, setCount] = useState({
     enteredValue: Number(enteredValue) ? Number(enteredValue) : 0,
     totalValue: Number(totalValue) ? Number(totalValue) : 0,
-    sign: "",
+    sign: sign ? sign : "",
   })
 
   const [, dropRef] = useDrop(
@@ -135,7 +135,7 @@ function App() {
 
       localStorage.setItem("totalValue", getTotalValue())
       localStorage.setItem("enteredValue", 0)
-
+      localStorage.setItem("sign", "")
       function getTotalValue() {
         if (count.enteredValue === "0" && count.sign === "÷") {
           return "無法除以零"
@@ -155,6 +155,7 @@ function App() {
   const handleSignClick = (btnSymbol) => {
 
 
+
     function getTotalValue() {
       if (!count.totalValue && count.enteredValue) {
         return count.enteredValue
@@ -163,6 +164,7 @@ function App() {
 
     localStorage.setItem("totalValue", getTotalValue())
     localStorage.setItem("enteredValue", 0)
+    localStorage.setItem("sign", btnSymbol)
 
     setCount({
       ...count,
@@ -176,7 +178,7 @@ function App() {
 
     localStorage.setItem("totalValue", 0)
     localStorage.setItem("enteredValue", 0)
-
+    localStorage.setItem("sign", "")
     setCount({
       ...count,
       enteredValue: 0,
@@ -196,7 +198,7 @@ function App() {
     }
     localStorage.setItem("totalValue", getTotalValue())
     localStorage.setItem("enteredValue", getEnterValue())
-
+    localStorage.setItem("sign", "")
     setCount({
       ...count,
       enteredValue: getEnterValue(),
@@ -216,7 +218,7 @@ function App() {
     }
     localStorage.setItem("totalValue", getTotalValue())
     localStorage.setItem("enteredValue", getEnteredValue())
-
+    localStorage.setItem("sign", "")
     setCount({
       ...count,
       enteredValue: getEnteredValue(),
@@ -238,7 +240,7 @@ function App() {
 
     localStorage.setItem("totalValue", getTotalValue())
     localStorage.setItem("enteredValue", getEnteredValue())
-
+    localStorage.setItem("sign", "")
     setCount({
       ...count,
       enteredValue: getEnteredValue(),

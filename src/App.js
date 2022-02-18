@@ -11,9 +11,12 @@ const btnSymbols = ["C", "+-", "%", "sq", 7, 8, 9, "÷", 4, 5, 6, "×", 1, 2, 3,
 
 function App() {
 
+  const enteredValue = localStorage.getItem('enteredValue')
+  const totalValue = localStorage.getItem('totalValue')
+
   let [count, setCount] = useState({
-    enteredValue: 0,
-    totalValue: 0,
+    enteredValue: Number(enteredValue) ? Number(enteredValue) : 0,
+    totalValue: Number(totalValue) ? Number(totalValue) : 0,
     sign: "",
   })
 
@@ -62,6 +65,8 @@ function App() {
   const handleNumberClick = (btnSymbol) => {
 
     btnSymbol = btnSymbol.toString()
+
+    localStorage.setItem('enteredValue', handleEnteredValue());
 
     function handleEnteredValue() {
 
@@ -121,6 +126,10 @@ function App() {
 
         }
       }
+
+      localStorage.setItem("totalValue", getTotalValue())
+      localStorage.setItem("enteredValue", 0)
+
       function getTotalValue() {
         if (count.enteredValue === "0" && count.sign === "÷") {
           return "無法除以零"

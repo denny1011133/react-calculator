@@ -66,8 +66,6 @@ function App() {
 
     btnSymbol = btnSymbol.toString()
 
-    localStorage.setItem('enteredValue', handleEnteredValue());
-
     function handleEnteredValue() {
 
       if (count.enteredValue === 0 && btnSymbol === "0") {
@@ -81,10 +79,18 @@ function App() {
       return count.enteredValue + btnSymbol
 
     }
+
+    function handleTotalValue() {
+      return !count.sign ? 0 : count.totalValue
+    }
+
+    localStorage.setItem('enteredValue', handleEnteredValue());
+    localStorage.setItem('totalValue', handleTotalValue());
+
     setCount({
       ...count,
       enteredValue: handleEnteredValue(),
-      totalValue: !count.sign ? 0 : count.totalValue,
+      totalValue: handleTotalValue()
     });
 
   }
@@ -154,6 +160,10 @@ function App() {
         return count.enteredValue
       } return count.totalValue
     }
+
+    localStorage.setItem("totalValue", getTotalValue())
+    localStorage.setItem("enteredValue", 0)
+
     setCount({
       ...count,
       sign: btnSymbol,
@@ -163,6 +173,10 @@ function App() {
   }
 
   const handleClear = () => {
+
+    localStorage.setItem("totalValue", 0)
+    localStorage.setItem("enteredValue", 0)
+
     setCount({
       ...count,
       enteredValue: 0,
@@ -172,28 +186,63 @@ function App() {
   }
 
   const handleReverse = () => {
+
+    function getEnterValue() {
+      return count.enteredValue ? count.enteredValue * -1 : 0
+    }
+
+    function getTotalValue() {
+      return count.totalValue ? count.totalValue * -1 : 0
+    }
+    localStorage.setItem("totalValue", getTotalValue())
+    localStorage.setItem("enteredValue", getEnterValue())
+
     setCount({
       ...count,
-      enteredValue: count.enteredValue ? count.enteredValue * -1 : 0,
-      totalValue: count.totalValue ? count.totalValue * -1 : 0,
+      enteredValue: getEnterValue(),
+      totalValue: getTotalValue(),
       sign: "",
     });
   }
 
   const handlePercent = () => {
+
+    function getEnteredValue() {
+      return (count.enteredValue ? count.enteredValue : 0) / 100
+    }
+
+    function getTotalValue() {
+      return (count.totalValue ? count.totalValue : 0) / 100
+    }
+    localStorage.setItem("totalValue", getTotalValue())
+    localStorage.setItem("enteredValue", getEnteredValue())
+
     setCount({
       ...count,
-      enteredValue: (count.enteredValue ? count.enteredValue : 0) / 100,
-      totalValue: (count.totalValue ? count.totalValue : 0) / 100,
+      enteredValue: getEnteredValue(),
+      totalValue: getTotalValue(),
       sign: "",
     });
+
   }
 
   const handleSqrt = () => {
+
+    function getEnteredValue() {
+      return Math.sqrt(count.enteredValue)
+    }
+
+    function getTotalValue() {
+      return Math.sqrt(count.totalValue)
+    }
+
+    localStorage.setItem("totalValue", getTotalValue())
+    localStorage.setItem("enteredValue", getEnteredValue())
+
     setCount({
       ...count,
-      enteredValue: Math.sqrt(count.enteredValue),
-      totalValue: Math.sqrt(count.totalValue),
+      enteredValue: getEnteredValue(),
+      totalValue: getTotalValue(),
       sign: "",
     });
   }
@@ -207,6 +256,8 @@ function App() {
         return count.enteredValue + btnSymbol
       }
     }
+
+    localStorage.setItem("enteredValue", enterDecimal())
     setCount({
       ...count,
       enteredValue: enterDecimal()

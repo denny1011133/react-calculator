@@ -37,7 +37,7 @@ function App() {
         handlePercent()
         break;
       case "sq":
-        handleSqure()
+        handleSqrt()
         break;
       case ".":
         handleDecimal(btn)
@@ -140,7 +140,7 @@ function App() {
       enteredValue: 0,
       totalValue: getTotalValue()
     });
-  };
+  }
 
   const handleClear = () => {
     setCount({
@@ -161,25 +161,22 @@ function App() {
   }
 
   const handlePercent = () => {
-
     setCount({
       ...count,
       enteredValue: (count.enteredValue ? count.enteredValue : 0) / 100,
       totalValue: (count.totalValue ? count.totalValue : 0) / 100,
       sign: "",
     });
-  };
+  }
 
-
-  const handleSqure = () => {
-
+  const handleSqrt = () => {
     setCount({
       ...count,
-      enteredValue: Math.sqrt(count.enteredValue ? Number(count.enteredValue) : 0),
-      totalValue: Math.sqrt(count.totalValue ? Number(count.totalValue) : 0),
+      enteredValue: Math.sqrt(count.enteredValue),
+      totalValue: Math.sqrt(count.totalValue ),
       sign: "",
     });
-  };
+  }
 
   const handleDecimal = (btnSymbol) => {
 
@@ -195,7 +192,8 @@ function App() {
       enteredValue: enterDecimal()
     });
 
-  };
+  }
+
   return (
     <Wrapper>
       <Screen count={count} value={count.enteredValue ? count.enteredValue : count.totalValue} />
@@ -205,14 +203,14 @@ function App() {
             return (
               <Button
                 key={i}
-                value={btn} onhandleClick={handleClick}
+                value={btn} handleClick={handleClick}
               />
             );
           })
         }
       </ButtonArea>
     </Wrapper>
-  );
+  )
 }
 
-export default App;
+export default App

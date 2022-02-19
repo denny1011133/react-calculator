@@ -136,7 +136,7 @@ function App() {
             alert("超過數字上限");
             return 0;
           }
-          return a / b;
+          return Number((a / b).toFixed(12));
         }
       };
 

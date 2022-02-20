@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# 簡易計算機
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+本專案以 React 作為核心的練習主軸，並使用 Create React App 建置。
 
-## Available Scripts
+![Alt calculator](https://i.imgur.com/2waAYj7.png)
 
-In the project directory, you can run:
 
-### `npm start`
+## 開發功能
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* 可對數字進行基本的四則運算(+/-/*/÷/=/clear(c))
+* 可對數字進行正負號切換
+* 可對數字進行百分比計算(%)
+* 可對數字進行開根號計算
+* 對浮點數進行四則運算時，排除不精準的問題(ex:0.1+0.2=0.3)
+* 重新整理瀏覽器可以記憶上一次輸入的數字及計算過程
+* 解決無窮小數點會超出介面範圍的問題
+* 超過數字上限會跳出提示
+* 實作四則運算不得除以０
+* 於畫面左上方顯示當時計算過程
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 尚未開發功能
 
-### `npm test`
+* 對計算機進行拖曳功能
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+大概的實作思考過程
+1. 採用 React Dnd libirary
+2. 對 Wrapper component 添加 useDrag hook 
+3. 對 App component 添加 useDrop hook，並用useState 管理 Wrapper DOM 的位置，並用 useRef()取得 DOM 在畫面上的位置(clientX,ClinetY)
+4. 當Wrapper 被 drop 入 App 裡面時， 觸發 callback function，取得滑鼠在畫面上的位置，並更新 state，進而更新 DOM 位置。
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 專案連結
+https://relaxed-saha-d75f3a.netlify.app/

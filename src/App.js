@@ -40,12 +40,24 @@ function App() {
     sign: sign ? sign : "",
   });
 
+  let [position, setPosition] = useState({
+    pos1: 0,
+    pos2: 0,
+    pos3: 0,
+    pos4: 0,
+  });
+
   const [, dropRef] = useDrop(() => ({
     accept: ItemTypes.WRAPPER,
-    drop: (item) => {
-      console.log("Drop on todo", item);
+    drop: (position) => {
+      handlePositionChange(position);
     },
   }));
+
+  const handlePositionChange = (position) => {
+    //取得滑鼠位置
+    setPosition({ pos1: 10, pos2: 10, pos3: 10, pos4: 0 });
+  };
 
   const handleClick = (btn) => {
     switch (btn) {
@@ -275,7 +287,7 @@ function App() {
 
   return (
     <div ref={dropRef}>
-      <Wrapper>
+      <Wrapper position={position}>
         <Screen
           count={count}
           value={count.enteredValue ? count.enteredValue : count.totalValue}

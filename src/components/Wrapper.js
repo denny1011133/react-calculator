@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useRef } from "react";
 import "./Wrapper.css";
-import { ItemTypes } from '../constants'
-import { useDrag } from 'react-dnd'
+import { ItemTypes } from "../constants";
+import { useDrag } from "react-dnd";
 
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children, position }) => {
+  const [collected, drag, dragPreview] = useDrag(() => ({
+    type: ItemTypes.WRAPPER,
+    item: { position },
+  }));
 
-    const [, dragRef] = useDrag(() => ({
-        type: ItemTypes.WRAPPER,
-    }))
-
-    return (
-        <div ref={dragRef} className="wrapper">{children}</div>)
+  return (
+    <div ref={drag} className="wrapper">
+      {children}
+    </div>
+  );
 };
 
-
 export default Wrapper;
-
-

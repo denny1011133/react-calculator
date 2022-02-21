@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Wrapper from "./components/Wrapper";
 import Screen from "./components/Screen";
 import ButtonArea from "./components/ButtonArea";
@@ -30,6 +30,7 @@ const btnSymbols = [
 ];
 
 function App() {
+
   const enteredValue = localStorage.getItem("enteredValue");
   const totalValue = localStorage.getItem("totalValue");
   const sign = localStorage.getItem("sign");
@@ -40,24 +41,29 @@ function App() {
     sign: sign ? sign : "",
   });
 
-  let [position, setPosition] = useState({
-    pos1: 0,
-    pos2: 0,
-    pos3: 0,
-    pos4: 0,
+  const [boxes, setBoxes] = useState({
+    left: 0,
+    top: 0
   });
+
+  const moveBox = useCallback((left, top) => {
+    setBoxes({ left: left, top: top });
+  }, [boxes, setBoxes]);
 
   const [, dropRef] = useDrop(() => ({
     accept: ItemTypes.WRAPPER,
-    drop: (position) => {
-      handlePositionChange(position);
-    },
-  }));
+    drop(item, monitor) {
 
-  const handlePositionChange = (position) => {
-    //取得滑鼠位置
-    setPosition({ pos1: 10, pos2: 10, pos3: 10, pos4: 0 });
-  };
+      const delta = monitor.getDifferenceFromInitialOffset();
+      const left = Math.round(item.left + delta.x);
+      const top = Math.round(item.top + delta.y);
+      console.log(left, top)
+      moveBox(left, top);
+      return undefined;
+    },
+  }), [moveBox]);
+
+
 
   const handleClick = (btn) => {
     switch (btn) {
@@ -286,8 +292,9 @@ function App() {
   };
 
   return (
-    <div ref={dropRef}>
-      <Wrapper position={position}>
+    <div ref={dropRef} style={{ width: "100vw", height: "100vh" }}>
+      <Wrapper left={boxes.left}
+        top={boxes.top}>
         <Screen
           count={count}
           value={count.enteredValue ? count.enteredValue : count.totalValue}

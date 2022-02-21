@@ -53,7 +53,7 @@ function App() {
   const [, dropRef] = useDrop(() => ({
     accept: ItemTypes.WRAPPER,
     drop(item, monitor) {// do what when being drop
-      const delta = monitor.getDifferenceFromInitialOffset();
+      const delta = monitor.getDifferenceFromInitialOffset();//displacement
       const left = Math.round(item.left + delta.x);
       const top = Math.round(item.top + delta.y);
       moveCalculator(left, top);

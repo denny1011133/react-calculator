@@ -3,16 +3,13 @@ import "./Wrapper.css";
 import { ItemTypes } from "../constants";
 import { useDrag } from "react-dnd";
 
-const Wrapper = ({ children, left, top, hideSourceOnDrag }) => {
+const Wrapper = ({ children, left, top }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.WRAPPER,
-    item: { left, top },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
+    item: { left, top },// describe the data being dragged. 
   }), [left, top]);
 
-  if (isDragging && hideSourceOnDrag) {
+  if (isDragging) {// remove DOM if dragging
     return <div ref={drag} />;
   }
   return (

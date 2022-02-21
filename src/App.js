@@ -41,25 +41,25 @@ function App() {
     sign: sign ? sign : "",
   });
 
-  const [boxes, setBoxes] = useState({
+  const [coordinate, setCoordinate] = useState({
     left: 0,
     top: 0
   });
 
-  const moveBox = (left, top) => {
-    setBoxes({ left: left, top: top })
+  const moveCalculator = (left, top) => {
+    setCoordinate({ left: left, top: top })
   }
 
   const [, dropRef] = useDrop(() => ({
     accept: ItemTypes.WRAPPER,
-    drop(item, monitor) {
+    drop(item, monitor) {// do what when being drop
       const delta = monitor.getDifferenceFromInitialOffset();
       const left = Math.round(item.left + delta.x);
       const top = Math.round(item.top + delta.y);
-      moveBox(left, top);
+      moveCalculator(left, top);
       return undefined;
     },
-  }), [moveBox]);
+  }), [moveCalculator]);
 
 
 
@@ -291,8 +291,8 @@ function App() {
 
   return (
     <div ref={dropRef} style={{ width: "100vw", height: "100vh" }}>
-      <Wrapper left={boxes.left}
-        top={boxes.top}>
+      <Wrapper left={coordinate.left}
+        top={coordinate.top}>
         <Screen
           count={count}
           value={count.enteredValue ? count.enteredValue : count.totalValue}

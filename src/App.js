@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import Wrapper from "./components/Wrapper";
 import Screen from "./components/Screen";
 import ButtonArea from "./components/ButtonArea";
@@ -46,18 +46,16 @@ function App() {
     top: 0
   });
 
-  const moveBox = useCallback((left, top) => {
-    setBoxes({ left: left, top: top });
-  }, [boxes, setBoxes]);
+  const moveBox = (left, top) => {
+    setBoxes({ left: left, top: top })
+  }
 
   const [, dropRef] = useDrop(() => ({
     accept: ItemTypes.WRAPPER,
     drop(item, monitor) {
-
       const delta = monitor.getDifferenceFromInitialOffset();
       const left = Math.round(item.left + delta.x);
       const top = Math.round(item.top + delta.y);
-      console.log(left, top)
       moveBox(left, top);
       return undefined;
     },
